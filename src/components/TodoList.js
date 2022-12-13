@@ -1,16 +1,21 @@
 import React from 'react'
 
-function TodoList({todos}) {
+function TodoList({id, userId, completed, title, onDelete}) {
+
+    const handleOnDelete = () => {
+        onDelete(id);
+    }
 
     return (
-        <ul className="list-group">
-            {todos.map((todo) => (
-                <li className="list-group-item" key={todo.id}>
-                    <input className="form-check-input me-1" type="checkbox" defaultChecked={todo.completed}/>
-                    <label className="form-check-label">User {todo.userId} - {todo.title}</label>
-                </li>
-            ))}
-        </ul>
+        <li className="list-group-item" key={id} style={{ display: 'flex', justifyContent: 'space-between' }}>
+            <div>
+                <input className="form-check-input me-1" type="checkbox" defaultChecked={completed}/>
+                <label className="form-check-label">User {userId} - {title}</label>
+            </div>
+            <span>
+                <button onClick={handleOnDelete}>Delete</button>
+            </span>
+        </li>
     )
 }
 
